@@ -1,0 +1,28 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgb(152, 133, 133);
+}
+
+.input{
+    font-size: 20px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.submitbtn{
+    background-color:blue;
+    color: azure;
+    font-size:15px ;
+    border-radius: 5px;
+
+}

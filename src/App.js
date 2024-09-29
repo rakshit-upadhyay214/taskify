@@ -3,7 +3,10 @@ import './App.css';
 
 function App() {
   return (
-    <TodoApp></TodoApp>
+    <div className='TodoApp'>
+      <TodoApp></TodoApp>
+    </div>  
+
   );
 }
 
