@@ -31,7 +31,7 @@ export default function Login(){
             console.log("Success")
             setErrorMessage(false)
             setSuccessMessage(true)
-            navigate('/welcome')
+            navigate(`/welcome/${username}`)
         }else{
             console.log("Failed")
             setErrorMessage(true)
@@ -41,6 +41,8 @@ export default function Login(){
 
     return(
         <>
+
+            <h1>Login</h1>
             <div className="login-container">
                 {/* It is the shortcut way of displaying these messages; Another way can be making different function components for these messages */}
                 {showSuccessMessage && <><div className='successMessage'>Authentication Successful</div> <Welcome/></>}
