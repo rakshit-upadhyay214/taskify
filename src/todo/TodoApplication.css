@@ -1,8 +1,8 @@
-body{
+/* body{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .login-container{
     align-items: center;
@@ -28,5 +28,11 @@ input{
     color: azure;
     font-size:15px ;
     border-radius: 5px;
+}
 
+.footer{
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+    height: 50px;
 }

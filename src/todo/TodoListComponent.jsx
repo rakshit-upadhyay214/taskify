@@ -8,11 +8,11 @@ export default function TodoList(){
     ]
     return(
         <>
-            <div className="todo-list">
+            <div className="container">
                 <h1>Todo List</h1>
                 <p>Here is the list of tasks, you have to do.</p>
                 <div>
-                    <table>
+                    <table className="table">
                         <thead>
                             <tr>
                                 <td>Id</td>
