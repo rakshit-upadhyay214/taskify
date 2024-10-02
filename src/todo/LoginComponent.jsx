@@ -1,17 +1,18 @@
 import './TodoApplication.css';
 import {useState} from 'react';
-import Welcome from './WelcomeComponent';
 import { useNavigate} from 'react-router-dom';
+import { useAuth } from './security/AuthContext';
+
 export default function Login(){
 
     const [username, setUserName]= useState('user')
     const [password, setPassword]= useState('12345')
 
-    const [showSuccessMessage, setSuccessMessage]= useState(false)
+    
     const [showErrorMessage, setErrorMessage]= useState(false)
 
     const navigate= useNavigate();
-
+    const authContext = useAuth();
     function handleUserChange(event){
         // console.log("Username is to be changed")
         // console.log(event.target.value)
@@ -26,26 +27,21 @@ export default function Login(){
     }
 
     function handleSubmit(){
-        console.log("Form submitted")
-        if(username==='user' && password==='12345'){
-            console.log("Success")
-            setErrorMessage(false)
-            setSuccessMessage(true)
+        if(authContext.login(username, password)){
             navigate(`/welcome/${username}`)
         }else{
+            authContext.setAuthenticated(false)
             console.log("Failed")
             setErrorMessage(true)
-            setSuccessMessage(false)
         }
     }
 
     return(
         <>
-
             <h1>Login</h1>
             <div className="login-container">
                 {/* It is the shortcut way of displaying these messages; Another way can be making different function components for these messages */}
-                {showSuccessMessage && <><div className='successMessage'>Authentication Successful</div> <Welcome/></>}
+                
                 {showErrorMessage && <div className='errorMessage'>Authentication Failed. Please check your credentials.</div>}
 
 
