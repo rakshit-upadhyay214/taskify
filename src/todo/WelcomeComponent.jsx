@@ -1,9 +1,15 @@
 import { useParams, Link } from "react-router-dom"
 import {useState} from 'react'
 import {getHelloWorld, getHelloPathVariable} from "./api/HelloApiService";
+import { useAuth } from "./security/AuthContext";
 
 export default function Welcome(){
-    const {username}=useParams();
+    const authContext = useAuth()
+    const username = authContext.user
+
+    console.log("Username should be "+username)
+
+    const [message, setMessage] = useState(null)
 
     function callRESTAPT(){
         console.log("called")
@@ -12,10 +18,9 @@ export default function Welcome(){
             .catch((error)=>console.log(error))
             .finally(()=>console.log("cleanup"))
 
-        getHelloPathVariable("Raju").then((response)=>greetings(response))
+        getHelloPathVariable(username).then((response)=>greetings(response))
     }
 
-    const [message, setMessage] = useState(null)
 
     function greetings(response){
         console.log(response)
@@ -24,9 +29,9 @@ export default function Welcome(){
 
     return (
         <>
-            <div>
-                <h1>Welcome {username}!</h1>
-                <div>
+            <div className="d-flex flex-column justify-contnet-center align-items-center h-100">
+                <h1 className="text-center">Welcome {username}!</h1>
+                <div >
                     <p>
                         Let's manage your Todos.
                     </p>

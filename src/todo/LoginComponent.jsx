@@ -4,25 +4,21 @@ import { useNavigate} from 'react-router-dom';
 import { useAuth } from './security/AuthContext';
 
 export default function Login(){
-
+    const navigate= useNavigate();
+    const authContext = useAuth();
     const [username, setUserName]= useState('user')
     const [password, setPassword]= useState('12345')
 
     
     const [showErrorMessage, setErrorMessage]= useState(false)
 
-    const navigate= useNavigate();
-    const authContext = useAuth();
+    
     function handleUserChange(event){
-        // console.log("Username is to be changed")
-        // console.log(event.target.value)
         setUserName(event.target.value)
     }
 
     
     function handlePasswordChange(event){
-        // console.log("Password is to be changed")
-        // console.log(event.target.value)
         setPassword(event.target.value)
     }
 
