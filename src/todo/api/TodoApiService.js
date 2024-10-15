@@ -11,9 +11,8 @@ export default function retreiveAllTodosOfUser(username){
 
 }
 
-export const retrieveTodoById= (username, id)=>
-    apiClient.get(`/users/${username}/todos/${id}`)
+export const retrieveTodoById= (username, id)=> apiClient.get(`/users/${username}/todos/${id}`)
 
 export const deleteTodobyId= (username, id)=> apiClient.delete(`/users/${username}/todos/${id}`)
 
-// export const updateTodoApi = (username, id)=> apiClient.put(`/users/${username}/todos/${id}`)
+export const updateTodoApi = (username, id, todo)=> apiClient.put(`/users/${username}/todos/${id}`,todo)
