@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom"
-import {retrieveTodoById, updateTodoApi} from "./api/TodoApiService"
+import {createTodoApi, retrieveTodoById, updateTodoApi} from "./api/TodoApiService"
 import { useAuth } from "./security/AuthContext"
 import { useEffect, useState } from "react"
 import {Formik, Form, fieldset, Field, ErrorMessage} from "formik"
+import moment from "moment"
 export default function AddTodo(){
     const {id}= useParams()
     const authContext = useAuth()
@@ -13,12 +14,15 @@ export default function AddTodo(){
     useEffect(()=>getTodo(),[id])
 
     function getTodo(){
-        retrieveTodoById(username, id)
-        .then((response)=> {
-            setDescription(response.data.description)
-            settargetDate(response.data.targetDate)
-        })
-        .catch((error)=>console.log(error))
+
+        if(id!= -1){
+            retrieveTodoById(username, id)
+            .then((response)=> {
+                setDescription(response.data.description)
+                settargetDate(response.data.targetDate)
+            })
+            .catch((error)=>console.log(error))
+        }
     }
 
     function onSubmit(values){
@@ -31,17 +35,24 @@ export default function AddTodo(){
             done: "false"
         }
         console.log(todo)
-        updateTodoApi(username, id, todo).then((response)=>navigate("/todos")).catch((error)=>console.log(error))
+        if(id==-1){
+            createTodoApi(username, todo).then((response)=>navigate("/todos")).catch((error)=>console.log(error))
+        }
+        else{
+            updateTodoApi(username, id, todo).then((response)=>navigate("/todos")).catch((error)=>console.log(error))
+        }
+        
         
     }
 
     function validate(values){
         let errors={ }
         if (values.description.length<5){
-            errors.description="Description should be of atleast 7 character"
+            errors.description="Description must be of atleast 7 characters"
         }
-        if(values.targetDate==""){
-            errors.targetDate = "Enter a Target date"
+        if(values.targetDate=="" || moment(values.targetDate).isBefore(moment())){
+
+            errors.targetDate = "Enter a valid target date"
         }
         return errors
        

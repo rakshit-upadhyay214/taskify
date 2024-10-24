@@ -45,12 +45,16 @@ export default function TodoList(){
         navigate(`/addtodos/${id}`)
     }
 
+    function addNewTodo(){
+        navigate("/addtodos/-1")
+    }
+
     return(
         <>
             <div className="container">
                 <h1>Todo List</h1>
                 <p>Here is the list of tasks, you have to do.</p>
-                {message && <div class="alert alert-warning">{message}</div>}         
+                {message && <div className="alert alert-warning">{message}</div>}         
                 <div>
                     <table className="table">
                         <thead>
@@ -71,8 +75,8 @@ export default function TodoList(){
                                             <td>{todo.description}</td>
                                             <td>{todo.done.toString()}</td>
                                             <td>{todo.targetDate.toString()}</td>
-                                            <td><button type="button" className="btn btn-secondary" onClick={()=>{deleteTodo(todo.id)}}>Delete</button></td>
-                                            <td><button type="button" className="btn btn-primary" onClick={()=>{updateTodo(todo.id)}}>Edit</button></td>
+                                            <td><button type="button" className="btn btn-warning" onClick={()=>{deleteTodo(todo.id)}}>Delete</button></td>
+                                            <td><button type="button" className="btn btn-success" onClick={()=>{updateTodo(todo.id)}}>Edit</button></td>
                                         </tr>
                                     )
                                 )
@@ -81,8 +85,7 @@ export default function TodoList(){
                         </tbody>
                     </table>
                 </div>
-
-
+                <button className="btn btn-success m-10" onClick={addNewTodo}>Add new Todo</button>
             </div>
         </>
     )

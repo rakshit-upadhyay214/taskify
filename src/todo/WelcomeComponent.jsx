@@ -6,19 +6,18 @@ import { useAuth } from "./security/AuthContext";
 export default function Welcome(){
     const authContext = useAuth()
     const username = authContext.user
-
+    const token = authContext.token
     console.log("Username should be "+username)
 
     const [message, setMessage] = useState(null)
 
     function callRESTAPT(){
         console.log("called")
-        getHelloWorld()
-            .then((response)=>greetings(response))
-            .catch((error)=>console.log(error))
-            .finally(()=>console.log("cleanup"))
-
-        getHelloPathVariable(username).then((response)=>greetings(response))
+        // getHelloWorld()
+        //     .then((response)=>greetings(response))
+        //     .catch((error)=>console.log(error))
+        //     .finally(()=>console.log("cleanup"))
+        getHelloPathVariable(username, token).then((response)=>greetings(response))
     }
 
 
@@ -33,10 +32,9 @@ export default function Welcome(){
                 <h1 className="text-center">Welcome {username}!</h1>
                 <div >
                     <p>
-                        Let's manage your Todos.
+                        Let's manage your Todos. <Link to="/todos">Click Here</Link>
                     </p>
-                    <br />
-                    <Link to="/todos">Click Here</Link>
+                    
                 </div>
 
                 <div><button className="btn btn-success" onClick={callRESTAPT}>Call REST API</button></div>
